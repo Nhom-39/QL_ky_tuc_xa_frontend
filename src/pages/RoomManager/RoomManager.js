@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
+import classNames from 'classnames/bind';
+
+import styles from './RoomManager.module.scss';
+
 import Button from '~/components/Button';
 import * as roomManagerService from '~/services/roomManagerService';
-
 import config from '~/config';
 import Success from '~/components/Success/Success';
 import ModalBtn from '~/components/Modal';
+import images from '~/assets/images';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
+const cx = classNames.bind(styles);
 
 function RoomManager() {
     const [rooms, setRooms] = useState([]);
@@ -39,16 +47,45 @@ function RoomManager() {
     return (
         <div>
             {!!message && <Success message={message} />}
-            <Button to={config.routes.createRoom}>Them</Button>
+            <Button
+                className={cx('add-room')}
+                leftIcon={<FontAwesomeIcon icon={faPlus} />}
+                success
+                to={config.routes.createRoom}
+            >
+                Thêm phòng
+            </Button>
             {rooms.map((room) => (
-                <li key={room.id}>
-                    <div>{room.tenPhong}</div>
-                    <div>{room.toaNha}</div>
-                    <div>{room.soLuong}</div>
+                <div className={cx('card-room', 'flex')} key={room.id}>
+                    <img className={cx('img-room')} src={images.roomImg} alt="" />
+                    <div className={cx('content')}>
+                        <div>
+                            Tên phòng: <span className={cx('bold')}>{room.tenPhong}</span>
+                        </div>
+                        <div>
+                            Tòa nhà: <span className={cx('bold')}>{room.toaNha}</span>
+                        </div>
+                        <div>
+                            Số lượng tối đa sinh viên: <span className={cx('bold')}>{room.soLuong}</span>
+                        </div>
+                    </div>
 
-                    <Button to={`/admin/quan-ly-phong/${room.id}/edit`}>Sửa</Button>
-                    {/* <Button onClick={() => deleteRoom(room.id)}>Xoa</Button> */}
-                    <Button onClick={() => handleShow(room.id)}>Xóa</Button>
+                    <Button
+                        leftIcon={<FontAwesomeIcon icon={faPenToSquare} />}
+                        className={cx('btn-click')}
+                        outline
+                        to={`/admin/quan-ly-phong/${room.id}/edit`}
+                    >
+                        Thay đổi thông tin phòng
+                    </Button>
+                    <Button
+                        leftIcon={<FontAwesomeIcon icon={faTrashCan} />}
+                        className={cx('btn-click')}
+                        primary
+                        onClick={() => handleShow(room.id)}
+                    >
+                        Xóa phòng
+                    </Button>
                     <ModalBtn
                         show={deleteRoomId === room.id}
                         textHeader="Xoá phòng?"
@@ -60,7 +97,7 @@ function RoomManager() {
                             deleteRoom(room.id);
                         }}
                     />
-                </li>
+                </div>
             ))}
         </div>
     );
