@@ -54,6 +54,16 @@ export const addStudentToRoom = async (id, id_phong) => {
     }
 };
 
+export const RemoveStudentToRoom = async (id) => {
+    try {
+        const res = await httpRequest.put(`admin/quan-ly-sinh-vien/${id}/xoa-khoi-phong`);
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getCreate = async () => {
     try {
         const res = await httpRequest.get(`admin/quan-ly-sinh-vien/create`);

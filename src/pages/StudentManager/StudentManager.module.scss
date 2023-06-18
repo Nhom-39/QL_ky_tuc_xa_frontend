@@ -1,0 +1,39 @@
+.card-student {
+    border-bottom: 1px solid #ccc;
+    padding: 25px 0;
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.btn-click {
+    margin: auto;
+}
+.btn-width {
+    width: 100%;
+}
+.warning {
+    & svg {
+        color: red;
+        margin-right: 5px;
+    }
+}
+.succses {
+    & svg {
+        color: rgb(32, 213, 236);
+        margin-right: 5px;
+    }
+}
+.img-room {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+.content {
+    margin: auto;
+}
+.wrapper {
+    margin: 10px 0;
+}

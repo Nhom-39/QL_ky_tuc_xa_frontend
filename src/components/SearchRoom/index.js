@@ -7,8 +7,9 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import * as searchServices from '~/services/searchService';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { useDebounce } from '~/hooks';
-import styles from '~/layouts/components/Search/Search.module.scss';
+import styles from './SearchRoom.module.scss';
 import Button from '../Button/Button';
+import images from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -66,6 +67,7 @@ function SearchRoom({ onRoomClick }) {
         <div>
             <HeadlessTippy
                 interactive
+                delay={[0, 0]}
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -74,14 +76,17 @@ function SearchRoom({ onRoomClick }) {
 
                             {searchResult.map((result) => (
                                 <Button
+                                    className={cx('btn-room')}
                                     key={result.id}
                                     onClick={() =>
                                         handleRoomClick(result.id, result.tenPhong, result.toaNha, result.soLuong)
                                     }
                                 >
-                                    <div>{result.id}</div>
-                                    <div>{result.tenPhong}</div>
-                                    <div>{result.toaNha}</div>
+                                    <div className={cx('wrapper', 'flex')}>
+                                        <img className={cx('img-room')} src={images.roomImg} alt="" />
+                                        <p className={cx('content')}>Phòng: {result.tenPhong}</p>
+                                        <p className={cx('content')}>Thuộc tòa nhà: {result.toaNha}</p>
+                                    </div>
                                 </Button>
                             ))}
                         </PopperWrapper>
