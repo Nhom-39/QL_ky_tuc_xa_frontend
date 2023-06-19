@@ -4,13 +4,15 @@
 }
 .search {
     position: relative;
-    width: 361px;
+    // width: 361px;
+    width: 100%;
     height: 46px;
     padding-left: 16px;
     background-color: rgba(22, 24, 35, 0.06);
     border-radius: 92px;
     display: flex;
     border: 1.5px solid transparent;
+    margin-top: 20px;
 
     input {
         flex: 1;

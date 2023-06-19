@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 import Button from '~/components/Button/Button';
-import Success from '~/components/Success/Success';
+import Toast from '~/components/Toast/Toast';
 
 import * as roomManagerService from '~/services/roomManagerService';
 
@@ -11,7 +11,7 @@ function EditRoom() {
 
     const [tenPhong, setTenPhong] = useState('');
     const [toaNha, setToaNha] = useState('');
-    const [soLuong, setSoLuong] = useState('');
+    const [soLuongMax, setSoLuongMax] = useState('');
 
     const [showMessage, setShowMessage] = useState(false);
 
@@ -23,8 +23,8 @@ function EditRoom() {
         setToaNha(event.target.value);
     };
 
-    const handleSoLuongChange = (event) => {
-        setSoLuong(event.target.value);
+    const handleSoLuongMaxChange = (event) => {
+        setSoLuongMax(event.target.value);
     };
 
     const handleFormSubmit = async (event) => {
@@ -33,7 +33,7 @@ function EditRoom() {
             id: id,
             tenPhong: tenPhong,
             toaNha: toaNha,
-            soLuong: soLuong,
+            soLuongMax: soLuongMax,
         };
 
         try {
@@ -48,7 +48,7 @@ function EditRoom() {
             const result = await roomManagerService.edit(id);
             setTenPhong(result.tenPhong);
             setToaNha(result.toaNha);
-            setSoLuong(result.soLuong);
+            setSoLuongMax(result.soLuongMax);
         };
 
         fetchApi();
@@ -62,13 +62,13 @@ function EditRoom() {
     };
     return (
         <div>
-            {showMessage && <Success message="Lưu thông tin thành công" />}
+            {showMessage && <Toast message="Lưu thông tin thành công" success />}
             <form onSubmit={handleFormSubmit}>
                 <input type="text" value={tenPhong} onChange={handleTenPhongChange} />
                 <input type="text" value={toaNha} onChange={handleToaNhaChange} />
-                <input type="text" value={soLuong} onChange={handleSoLuongChange} />
+                <input type="text" value={soLuongMax} onChange={handleSoLuongMaxChange} />
                 <Button type="submit" onClick={onclick}>
-                    Luu
+                    Lưu
                 </Button>
             </form>
         </div>

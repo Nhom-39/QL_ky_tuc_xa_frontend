@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import * as studentManagerService from '~/services/studentManagerService';
 
 import Button from '~/components/Button/Button';
-import Success from '~/components/Success/Success';
+import Toast from '~/components/Toast';
 import ModalBtn from '~/components/Modal';
 import SearchRoom from '~/components/SearchRoom';
 import images from '~/assets/images';
@@ -21,18 +21,20 @@ import {
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
 
 function StudentManager() {
     const [students, setStudents] = useState([]);
     const [message, setMessage] = useState('');
+    const [error, setError] = useState(false);
     const [deleteStudentId, setDeleteStudentId] = useState(null);
     const [deleteRoomFromStudentId, setDeleteRoomFromStudentId] = useState(null);
     const [roomId, setRoomId] = useState(null);
     const [tenPhong, setTenPhong] = useState('');
     const [toaNha, setToaNha] = useState('');
-    const [soLuong, setSoLuong] = useState();
+    const [soLuongMax, setSoLuongMax] = useState();
     const [showSearchRoom, setShowSearchRoom] = useState(false);
     const [showClickSearchRoom, setShowClickSearchRoom] = useState(false);
 
@@ -68,23 +70,34 @@ function StudentManager() {
 
     const handleAddStudenToRoom = async (id, roomId) => {
         try {
-            await studentManagerService.addStudentToRoom(id, roomId);
+            const result = await studentManagerService.addStudentToRoom(id, roomId);
+            if (result) {
+                setMessage('Thêm sinh viên vào phòng thành công');
+            } else {
+                setMessage('Phòng đã đầy');
+                setError(true);
+            }
+
+            fetchStudents();
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     };
 
-    const handleRoomClick = (id_phong, ten_phong, toa_nha, so_luong) => {
+    const handleRoomClick = (id_phong, ten_phong, toa_nha, so_luong_max) => {
         setRoomId(id_phong);
         setTenPhong(ten_phong);
         setToaNha(toa_nha);
-        setSoLuong(so_luong);
+        setSoLuongMax(so_luong_max);
         setShowClickSearchRoom(true);
     };
 
     const handleRemoveStudenToRoom = async (id) => {
         try {
             await studentManagerService.RemoveStudentToRoom(id);
+            setMessage('Xóa sinh viên khỏi phòng thành công');
+            setError(false);
+            fetchStudents();
         } catch (error) {
             console.error(error);
         }
@@ -92,7 +105,8 @@ function StudentManager() {
 
     return (
         <Container>
-            {!!message && <Success message={message} />}
+            {!!message && !error && <Toast message={message} success />}
+            {!!message && error && <Toast message={message} error />}
             {students.map((student) => (
                 <Row className={cx('card-student', 'flex')} key={student.id}>
                     <Col xs="3">
@@ -151,7 +165,7 @@ function StudentManager() {
                         }}
                     />
                     <Col>
-                        {student.room === null && addStudentId !== student.id && (
+                        {student.room === null && (
                             <div className={cx('flex', 'items-center')}>
                                 <Col xs="6" className={cx('warning')}>
                                     <FontAwesomeIcon icon={faTriangleExclamation} /> Sinh viên chưa có phòng
@@ -198,6 +212,7 @@ function StudentManager() {
                             handleDelete={() => {
                                 setDeleteRoomFromStudentId(null);
                                 handleRemoveStudenToRoom(student.id);
+                                setError(false);
                             }}
                         />
 
@@ -208,15 +223,20 @@ function StudentManager() {
                                 {showClickSearchRoom && (
                                     <>
                                         <div className={cx('wrapper', 'flex')}>
+                                            <FontAwesomeIcon icon={faCheckSquare} />
                                             <img className={cx('img-room')} src={images.roomImg} alt="" />
-                                            <p className={cx('content')}>Phòng: {tenPhong}</p>
-                                            <p className={cx('content')}>Thuộc tòa nhà: {toaNha}</p>
-                                            <p className={cx('content')}>Số lượng max: {soLuong}</p>
+                                            <div className={cx('content')}>
+                                                Phòng: {tenPhong}.&nbsp; Thuộc tòa nhà: {toaNha}. &nbsp; Số lượng max:{' '}
+                                                {soLuongMax}.
+                                            </div>
                                         </div>
                                         <Button
                                             className={cx('btn-click')}
                                             outline
-                                            onClick={() => handleAddStudenToRoom(student.id, roomId)}
+                                            onClick={() => {
+                                                handleAddStudenToRoom(student.id, roomId);
+                                                setShowSearchRoom(false);
+                                            }}
                                         >
                                             Thêm sinh viên
                                         </Button>
