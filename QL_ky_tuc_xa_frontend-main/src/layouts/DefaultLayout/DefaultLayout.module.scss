@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column; // can doc
+    align-items: center;
+}
+.container {
+    width: var(--default-layout-width);
+    max-width: 100%;
+    padding: 0 26px;
+    margin-top: 60px;
+    display: flex;
+}
+.content {
+    flex: 1;
+}
