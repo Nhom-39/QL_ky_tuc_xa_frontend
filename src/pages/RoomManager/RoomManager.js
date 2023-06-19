@@ -6,7 +6,7 @@ import styles from './RoomManager.module.scss';
 import Button from '~/components/Button';
 import * as roomManagerService from '~/services/roomManagerService';
 import config from '~/config';
-import Success from '~/components/Success/Success';
+import Success from '~/components/Toast/Toast';
 import ModalBtn from '~/components/Modal';
 import images from '~/assets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -66,7 +66,7 @@ function RoomManager() {
                             Tòa nhà: <span className={cx('bold')}>{room.toaNha}</span>
                         </div>
                         <div>
-                            Số lượng tối đa sinh viên: <span className={cx('bold')}>{room.soLuong}</span>
+                            Số lượng tối đa sinh viên: <span className={cx('bold')}>{room.soLuongMax}</span>
                         </div>
                     </div>
 

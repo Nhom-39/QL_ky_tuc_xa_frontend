@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 import Button from '~/components/Button/Button';
-import Success from '~/components/Success/Success';
+import Toast from '~/components/Toast/Toast';
 import * as studentManagerService from '~/services/studentManagerService';
 
 function EditStudent() {
@@ -81,7 +81,7 @@ function EditStudent() {
 
     return (
         <div>
-            {showMessage && <Success message="Lưu thông tin thành công" />}
+            {showMessage && <Toast message="Lưu thông tin thành công" success />}
             <form onSubmit={handleFormSubmit}>
                 <input type="text" value={hoTen} onChange={handleHoTenChange} />
                 <input type="text" value={email} onChange={handleEmailChange} />
@@ -89,8 +89,8 @@ function EditStudent() {
                 <input type="text" value={maSV} onChange={handleMaSVChange} />
                 <input type="text" value={ngaySinh} onChange={handleNgaySinhChange} />
                 <input type="text" value={soDienThoai} onChange={handleSoDienThoaiChange} />
-                <Button type="submit" onClick={onclick}>
-                    Luu
+                <Button outline type="submit" onClick={onclick}>
+                    Lưu
                 </Button>
             </form>
         </div>

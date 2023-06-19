@@ -26,14 +26,22 @@
         margin-right: 5px;
     }
 }
+.wrapper {
+    margin: 10px 0;
+    float: left;
+
+    & svg {
+        margin: auto;
+        font-size: 30px;
+        color: rgb(45, 211, 33);
+    }
+}
 .img-room {
     width: 40px;
     height: 40px;
-    margin-right: 5px;
+    margin: 0 5px;
 }
 .content {
-    margin: auto;
-}
-.wrapper {
-    margin: 10px 0;
+    display: flex;
+    align-items: center;
 }

@@ -1,0 +1,23 @@
+.wrapper {
+    width: 700px;
+    margin: auto;
+
+    // display: grid;
+    // place-items: center;
+}
+
+.div-input {
+    margin: 20px 0;
+}
+.input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.error {
+    color: red;
+}
+.error-input {
+    border-color: red;
+}
