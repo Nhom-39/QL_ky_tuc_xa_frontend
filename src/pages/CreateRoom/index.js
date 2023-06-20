@@ -40,7 +40,7 @@ function CreateRoom() {
             soLuongMax: soLuongMax,
         };
 
-        if (tenPhong.trim() && toaNha.trim() && soLuongMax.trim()) {
+        if (tenPhong !== '' && toaNha !== '' && soLuongMax !== '') {
             try {
                 await roomManagerService.post(data);
             } catch (error) {
@@ -52,9 +52,9 @@ function CreateRoom() {
             setToaNha('');
             setSoLuongMax('');
         } else {
-            if (tenPhong.trim() === '') setErrorValue1(true);
-            if (toaNha.trim() === '') setErrorValue2(true);
-            if (soLuongMax.trim() === '') setErrorValue3(true);
+            if (tenPhong === '') setErrorValue1(true);
+            if (toaNha === '') setErrorValue2(true);
+            if (soLuongMax === '') setErrorValue3(true);
             setMessage('Các trường chưa nhập đầy đủ thông tin');
             setError(true);
         }
@@ -70,7 +70,7 @@ function CreateRoom() {
             {!!message && error && <Toast message={message} error />}
             <div className={cx('div-input', 'gird')}>
                 <label htmlFor="ten-phong">Tên phòng</label>
-                {errorValue1 && <p className={cx('error')}>*Tên phòng là bắt buộc</p>}
+                {errorValue1 && <span className={cx('error')}>*Tên phòng là bắt buộc</span>}
                 <input
                     id="ten-phong"
                     className={errorValue1 ? cx('error-input') : cx('input')}
@@ -81,7 +81,7 @@ function CreateRoom() {
             </div>
             <div className={cx('div-input', 'gird')}>
                 <label htmlFor="toa-nha">Tên tòa nhà</label>
-                {errorValue2 && <p className={cx('error')}>*Tên tòa nhà là bắt buộc</p>}
+                {errorValue2 && <span className={cx('error')}>*Tên tòa nhà là bắt buộc</span>}
                 <input
                     id="toa-nha"
                     className={errorValue2 ? cx('error-input') : cx('input')}
@@ -92,11 +92,13 @@ function CreateRoom() {
             </div>
             <div className={cx('div-input', 'gird')}>
                 <label htmlFor="so-luong">Số lượng tối đa sinh viên</label>
-                {errorValue3 && <p className={cx('error')}>*Số lượng tối đa sinh viên là bắt buộc</p>}
+                {errorValue3 && (
+                    <span className={cx('error')}>*Số lượng tối đa sinh viên là bắt buộc và phải là 1 số</span>
+                )}
                 <input
                     id="so-luong"
                     className={errorValue3 ? cx('error-input') : cx('input')}
-                    type="text"
+                    type="number"
                     value={soLuongMax}
                     onChange={handleSoLuongMaxChange}
                 />
