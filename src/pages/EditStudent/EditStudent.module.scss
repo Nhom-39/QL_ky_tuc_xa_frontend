@@ -6,6 +6,9 @@
 .div-input {
     margin: 20px 0;
 }
+.div-flex-input {
+    justify-content: space-between;
+}
 .input {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -20,4 +23,7 @@
     padding: 5px;
     border: 1px solid red;
     border-radius: 5px;
+}
+.margin {
+    margin-left: 10px;
 }
