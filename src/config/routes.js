@@ -3,7 +3,7 @@ const routes = {
     following: '/following',
     profile: '/:nickname',
     upload: '/upload',
-    search: '/search',
+    search: '/tim-kiem/phong',
     live: '/live',
     roomManager: '/admin/quan-ly-phong',
     editRoom: '/admin/quan-ly-phong/:id/edit',
@@ -11,6 +11,8 @@ const routes = {
     studentManager: '/admin/quan-ly-sinh-vien',
     editStudent: '/admin/quan-ly-sinh-vien/:id/edit',
     infoRoom: '/admin/quan-ly-phong/:id',
+    register: '/dang-ky',
+    roomList: '/danh-sach-phong',
 };
 
 export default routes;

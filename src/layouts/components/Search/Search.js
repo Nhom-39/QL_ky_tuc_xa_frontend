@@ -3,11 +3,14 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
+import { Link } from 'react-router-dom';
 
 import * as searchServices from '~/services/searchService';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { useDebounce } from '~/hooks';
 import styles from './Search.module.scss';
+import Button from '~/components/Button/Button';
+import images from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -55,6 +58,7 @@ function Search() {
             setSearchValue(searchValue);
         }
     };
+    const handleRoomClick = (id, tenPhong, toaNha, soLuong) => {};
 
     return (
         <div>
@@ -67,11 +71,19 @@ function Search() {
                             <h4 className={cx('search-title')}>Phòng</h4>
 
                             {searchResult.map((result) => (
-                                <div key={result.id}>
-                                    <div>{result.id}</div>
-                                    <div>{result.tenPhong}</div>
-                                    <div>{result.toaNha}</div>
-                                </div>
+                                <Button
+                                    className={cx('btn-room')}
+                                    key={result.id}
+                                    onClick={() =>
+                                        handleRoomClick(result.id, result.tenPhong, result.toaNha, result.soLuong)
+                                    }
+                                >
+                                    <div className={cx('wrapper', 'flex')}>
+                                        <img className={cx('img-room')} src={images.roomImg} alt="" />
+                                        <p className={cx('content')}>Phòng: {result.tenPhong}</p>
+                                        <p className={cx('content')}>Thuộc tòa nhà: {result.toaNha}</p>
+                                    </div>
+                                </Button>
                             ))}
                         </PopperWrapper>
                     </div>
@@ -94,9 +106,11 @@ function Search() {
                     )}
 
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
+                    <Link to={`/tim-kiem/phong/?q=${searchValue}`}>
+                        <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </button>
+                    </Link>
                 </div>
             </HeadlessTippy>
         </div>
