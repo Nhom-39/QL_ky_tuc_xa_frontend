@@ -80,3 +80,7 @@ body {
 .items-center {
     align-items: center;
 }
+
+.row > * {
+    padding: 0;
+}

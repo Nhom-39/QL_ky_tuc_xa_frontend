@@ -1,8 +1,8 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-export const getRoom = async () => {
+export const getNews = async () => {
     try {
-        const res = await httpRequest.get('/admin/quan-ly-phong');
+        const res = await httpRequest.get('/admin/quan-ly-thong-bao');
         console.log(res);
         return res;
     } catch (error) {
@@ -12,7 +12,7 @@ export const getRoom = async () => {
 
 export const remove = async (id) => {
     try {
-        const res = await httpRequest.remove(`/admin/quan-ly-phong/${id}`);
+        const res = await httpRequest.remove(`/admin/quan-ly-thong-bao/${id}`);
         console.log(res);
         return res;
     } catch (error) {
@@ -22,7 +22,7 @@ export const remove = async (id) => {
 
 export const edit = async (id) => {
     try {
-        const res = await httpRequest.get(`/admin/quan-ly-phong/${id}/edit`);
+        const res = await httpRequest.get(`/admin/quan-ly-thong-bao/${id}/edit`);
         console.log(res);
         return res;
     } catch (error) {
@@ -30,9 +30,9 @@ export const edit = async (id) => {
     }
 };
 
-export const getRoomInfo = async (id) => {
+export const getNewsInfo = async (id) => {
     try {
-        const res = await httpRequest.get(`/admin/quan-ly-phong/${id}`);
+        const res = await httpRequest.get(`/admin/quan-ly-thong-bao/${id}`);
         console.log(res);
         return res;
     } catch (error) {
@@ -42,7 +42,7 @@ export const getRoomInfo = async (id) => {
 
 export const put = async (id, data) => {
     try {
-        const res = await httpRequest.put(`/admin/quan-ly-phong/${id}`, data);
+        const res = await httpRequest.put(`/admin/quan-ly-thong-bao/${id}`, data);
         console.log(res);
         return res;
     } catch (error) {
@@ -52,7 +52,7 @@ export const put = async (id, data) => {
 
 export const getCreate = async () => {
     try {
-        const res = await httpRequest.get(`/admin/quan-ly-phong/create`);
+        const res = await httpRequest.get(`/admin/quan-ly-thong-bao/create`);
         console.log(res);
         return res;
     } catch (error) {
@@ -62,7 +62,7 @@ export const getCreate = async () => {
 
 export const post = async (data) => {
     try {
-        const res = await httpRequest.post(`/admin/quan-ly-phong/create`, data);
+        const res = await httpRequest.post(`/admin/quan-ly-thong-bao/create`, data);
         console.log(res);
         return res;
     } catch (error) {

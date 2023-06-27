@@ -84,11 +84,10 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faSignOut}></FontAwesomeIcon>,
             title: 'Đăng xuất',
-            to: '/dang-xuat',
+            to: '/',
             separate: true,
         },
     ];
-
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>

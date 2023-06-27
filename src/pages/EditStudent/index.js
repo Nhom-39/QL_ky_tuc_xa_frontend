@@ -18,7 +18,6 @@ function EditStudent() {
     const [maSV, setMaSV] = useState('');
     const [ngaySinh, setNgaySinh] = useState('');
     const [soDienThoai, setSoDienThoai] = useState('');
-    // const [selectedOption, setSelectedOption] = useState('');
 
     const [message, setMessage] = useState('');
     const [error, setError] = useState(false);
