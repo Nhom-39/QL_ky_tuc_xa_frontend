@@ -35,6 +35,7 @@ function StudentManager() {
     const [tenPhong, setTenPhong] = useState('');
     const [toaNha, setToaNha] = useState('');
     const [soLuongMax, setSoLuongMax] = useState();
+    const [image, setImage] = useState();
     const [showSearchRoom, setShowSearchRoom] = useState(false);
     const [showClickSearchRoom, setShowClickSearchRoom] = useState(false);
 
@@ -84,11 +85,12 @@ function StudentManager() {
         }
     };
 
-    const handleRoomClick = (id_phong, ten_phong, toa_nha, so_luong_max) => {
+    const handleRoomClick = (id_phong, ten_phong, toa_nha, so_luong_max, image) => {
         setRoomId(id_phong);
         setTenPhong(ten_phong);
         setToaNha(toa_nha);
         setSoLuongMax(so_luong_max);
+        setImage(image);
         setShowClickSearchRoom(true);
     };
 
@@ -224,7 +226,7 @@ function StudentManager() {
                                     <>
                                         <div className={cx('wrapper', 'flex')}>
                                             <FontAwesomeIcon icon={faCheckSquare} />
-                                            <img className={cx('img-room')} src={images.roomImg} alt="" />
+                                            <img className={cx('img-room')} src={image} alt="" />
                                             <div className={cx('content')}>
                                                 Phòng: {tenPhong}.&nbsp; Thuộc tòa nhà: {toaNha}. &nbsp; Số lượng max:{' '}
                                                 {soLuongMax}.

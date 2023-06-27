@@ -8,7 +8,6 @@ import * as roomManagerService from '~/services/roomManagerService';
 import config from '~/config';
 import Success from '~/components/Toast/Toast';
 import ModalBtn from '~/components/Modal';
-import images from '~/assets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
@@ -57,7 +56,7 @@ function RoomManager() {
             </Button>
             {rooms.map((room) => (
                 <div className={cx('card-room', 'flex')} key={room.id}>
-                    <img className={cx('img-room')} src={images.roomImg} alt="" />
+                    <img className={cx('img-room')} src={room.image} alt="" />
                     <div className={cx('content')}>
                         <div>
                             Tên phòng: <span className={cx('bold')}>{room.tenPhong}</span>

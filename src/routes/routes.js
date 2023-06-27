@@ -7,7 +7,6 @@ import EditRoom from '~/pages/EditRoom';
 import CreateRoom from '~/pages/CreateRoom';
 import StudentManager from '~/pages/StudentManager';
 import EditStudent from '~/pages/EditStudent';
-import InfoRoom from '~/pages/InfoRoom';
 import Register from '~/pages/Register';
 import RoomList from '~/pages/RoomList';
 import SearchPage from '~/pages/SearchPage';
@@ -17,6 +16,8 @@ import CreateNews from '~/pages/CreateNews';
 import EditNews from '~/pages/EditNews';
 import NewsList from '~/pages/NewsList';
 import NewsItem from '~/pages/NewsItem';
+import RoomItem from '~/pages/RoomItem';
+import RoomTracking from '~/pages/RoomTracking';
 const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.profile, component: Profile },
@@ -24,7 +25,7 @@ const publicRoutes = [
     { path: config.routes.createRoom, component: CreateRoom },
     { path: config.routes.studentManager, component: StudentManager },
     { path: config.routes.editStudent, component: EditStudent },
-    { path: config.routes.infoRoom, component: InfoRoom },
+    { path: config.routes.roomItem, component: RoomItem },
     { path: config.routes.editRoom, component: EditRoom },
     { path: config.routes.register, component: Register },
     { path: config.routes.roomList, component: RoomList },
@@ -35,6 +36,7 @@ const publicRoutes = [
     { path: config.routes.editNews, component: EditNews },
     { path: config.routes.newsList, component: NewsList },
     { path: config.routes.newsItem, component: NewsItem },
+    { path: config.routes.roomTracking, component: RoomTracking },
 ];
 
 const privateRoutes = [];
