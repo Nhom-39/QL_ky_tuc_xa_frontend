@@ -6,7 +6,7 @@ const routes = {
     createRoom: '/admin/quan-ly-phong/create',
     studentManager: '/admin/quan-ly-sinh-vien',
     editStudent: '/admin/quan-ly-sinh-vien/:id/edit',
-    infoRoom: '/admin/quan-ly-phong/:id',
+    roomItem: '/danh-sach-phong/:id',
     register: '/dang-ky',
     roomList: '/danh-sach-phong',
     login: '/dang-nhap',
@@ -15,6 +15,7 @@ const routes = {
     editNews: '/admin/quan-ly-thong-bao/:id/edit',
     newsList: '/thong-bao',
     newsItem: '/thong-bao/:id',
+    roomTracking: 'user/theo-doi-phong',
 };
 
 export default routes;

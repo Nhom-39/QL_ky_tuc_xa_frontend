@@ -36,6 +36,9 @@ function Login() {
                 if (result === true) {
                     setMessage('Đăng nhập thành công');
                     setError(false);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
                 } else {
                     setMessage(result);
                     setError(true);

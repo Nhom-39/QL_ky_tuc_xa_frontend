@@ -48,13 +48,14 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-    const currentUser = true;
+    const authenticated = localStorage.getItem('authenticated');
+    const authority = localStorage.getItem('authorities');
 
     const handleMenuChange = (menuItem) => {
         console.log(menuItem);
     };
 
-    const userMenu = [
+    const adminMenu = [
         {
             icon: <FontAwesomeIcon icon={faPeopleRoof}></FontAwesomeIcon>,
             title: 'Quản lý phòng',
@@ -88,6 +89,29 @@ function Header() {
             separate: true,
         },
     ];
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faPeopleRoof}></FontAwesomeIcon>,
+            title: 'Theo dõi phòng',
+            to: '/user/theo-doi-phong',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faSms}></FontAwesomeIcon>,
+            title: 'Báo cáo và phản hồi',
+            to: '/user/bao-cao-va-phan-hoi',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut}></FontAwesomeIcon>,
+            title: 'Đăng xuất',
+            to: '/',
+            separate: true,
+        },
+    ];
+
+    const itemsAdmin = authenticated && authority === 'ADMIN' ? adminMenu : MENU_ITEMS;
+    const itemsUser = authenticated && authority === 'USER' ? userMenu : MENU_ITEMS;
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -100,20 +124,38 @@ function Header() {
                 <Search />
 
                 <div className={cx('actions')}>
-                    {currentUser ? (
+                    {authenticated ? (
                         <></>
                     ) : (
                         <>
-                            <Button primary className={cx('custom-login')}>
+                            <Button primary className={cx('custom-login')} to={config.routes.login}>
                                 Đăng nhập
                             </Button>
-                            <Button primary className={cx('custom-login')}>
+                            <Button primary className={cx('custom-login')} to={config.routes.register}>
                                 Đăng ký
                             </Button>
                         </>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
-                        {currentUser ? (
+                    {/* <Menu items={authenticated ? adminMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                        {authenticated ? (
+                            <Image
+                                className={cx('user-avatar')}
+                                src="https://tse2.mm.bing.net/th?id=OIP.KGdLPsiqGjKqCYuhzhmmWgHaEP&pid=Api&P=0&h=180"
+                                alt=""
+                            />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
+                            </button>
+                        )}
+                    </Menu> */}
+                    <Menu
+                        items={
+                            (authority === 'ADMIN' && itemsAdmin) || (authority === 'USER' && itemsUser) || MENU_ITEMS
+                        }
+                        onChange={handleMenuChange}
+                    >
+                        {authenticated ? (
                             <Image
                                 className={cx('user-avatar')}
                                 src="https://tse2.mm.bing.net/th?id=OIP.KGdLPsiqGjKqCYuhzhmmWgHaEP&pid=Api&P=0&h=180"

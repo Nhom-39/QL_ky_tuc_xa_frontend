@@ -1,9 +1,15 @@
+.wrapper {
+    margin: 50px 0;
+}
 .card-item {
     position: relative;
     overflow: hidden;
     display: block;
     border: none !important;
     margin: 15px;
+}
+.image {
+    height: 290px;
 }
 .body {
     position: absolute;

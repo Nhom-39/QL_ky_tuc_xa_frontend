@@ -10,7 +10,6 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { useDebounce } from '~/hooks';
 import styles from './Search.module.scss';
 import Button from '~/components/Button/Button';
-import images from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -58,7 +57,6 @@ function Search() {
             setSearchValue(searchValue);
         }
     };
-    const handleRoomClick = (id, tenPhong, toaNha, soLuong) => {};
 
     return (
         <div>
@@ -71,15 +69,9 @@ function Search() {
                             <h4 className={cx('search-title')}>Phòng</h4>
 
                             {searchResult.map((result) => (
-                                <Button
-                                    className={cx('btn-room')}
-                                    key={result.id}
-                                    onClick={() =>
-                                        handleRoomClick(result.id, result.tenPhong, result.toaNha, result.soLuong)
-                                    }
-                                >
+                                <Button className={cx('btn-room')} key={result.id} to={`/danh-sach-phong/${result.id}`}>
                                     <div className={cx('wrapper', 'flex')}>
-                                        <img className={cx('img-room')} src={images.roomImg} alt="" />
+                                        <img className={cx('img-room')} src={result.image} alt="" />
                                         <p className={cx('content')}>Phòng: {result.tenPhong}</p>
                                         <p className={cx('content')}>Thuộc tòa nhà: {result.toaNha}</p>
                                     </div>

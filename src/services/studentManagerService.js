@@ -73,3 +73,27 @@ export const getCreate = async () => {
         console.log(error);
     }
 };
+
+export const registerRoom = async (masv, id_phong_dang_ky) => {
+    try {
+        const res = await httpRequest.put(`/user/${masv}/dang-ky-phong`, '', {
+            params: {
+                id_phong_dang_ky,
+            },
+        });
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getInfoRoom = async (masv) => {
+    try {
+        const res = await httpRequest.get(`user/${masv}/room`);
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

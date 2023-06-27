@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useLocation } from 'react-router-dom';
 import * as searchServices from '~/services/searchService';
-import Button from '~/components/Button/Button';
 import styles from './SearchPage.module.scss';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -27,19 +31,29 @@ function SearchPage() {
         fetchApi();
     }, [searchValue]);
     return (
-        <div>
-            {searchResult.map((result) => (
-                <Button
-                    className={cx('btn-room')}
-                    key={result.id}
-                    // onClick={() => handleRoomClick(result.id, result.tenPhong, result.toaNha, result.soLuong)}
-                >
-                    <div className={cx('wrapper', 'flex')}>
-                        <p className={cx('content')}>Phòng: {result.tenPhong}</p>
-                        <p className={cx('content')}>Thuộc tòa nhà: {result.toaNha}</p>
-                    </div>
-                </Button>
-            ))}
+        <div className={cx('wrapper')}>
+            <div className={cx('banner')}>Có {searchResult.length} kết quả thỏa mãn</div>
+            <Container>
+                <Row>
+                    {searchResult.map((room) => (
+                        <Col xs={12} xl={3} md={4} className={cx('div-card')}>
+                            <Link to={`/danh-sach-phong/${room.id}`}>
+                                <Card className={cx('card-item')}>
+                                    <Card.Img className={cx('image')} variant="top" src={room.image} />
+                                    <Card.Body className={cx('body')}>
+                                        <Card.Title className={cx('title')}>
+                                            <p>
+                                                Phòng {room.tenPhong} {room.toaNha} số lượng {room.soLuongMax} sinh viên
+                                            </p>
+                                        </Card.Title>
+                                        <Card.Text className={cx('content')}>{room.giaPhong}Đ / Tháng</Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
         </div>
     );
 }
