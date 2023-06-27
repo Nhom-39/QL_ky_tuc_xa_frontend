@@ -8,6 +8,7 @@ const images = {
     ktx2: require('~/assets/images/ktx2.jpg'),
     ktx3: require('~/assets/images/ktx3.jpg'),
     ktxFooter: require('~/assets/images/ktx-footer.png'),
+    banner: require('~/assets/images/Welcome.png'),
 };
 
 export default images;

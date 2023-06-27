@@ -6,6 +6,7 @@ import MenuItem from './MenuItem';
 import Header from './Header';
 import styles from './Menu.module.scss';
 import { useState } from 'react';
+import * as authService from '~/services/authService';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,15 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
 
     const current = history[history.length - 1];
 
+    const handleFormSubmitLogout = async (event) => {
+        try {
+            const result = await authService.getLogout();
+            console.log(result);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.children;
@@ -24,7 +34,9 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
                     key={index}
                     data={item}
                     onClick={() => {
-                        if (isParent) {
+                        if (item.title === 'Đăng xuất') {
+                            handleFormSubmitLogout();
+                        } else if (isParent) {
                             setHistory((prev) => [...prev, item.children]);
                         } else {
                             onChange(item);

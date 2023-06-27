@@ -1,0 +1,23 @@
+.wrapper {
+    width: 700px;
+    margin: auto;
+}
+
+.div-input {
+    margin: 20px 0;
+}
+.input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.error {
+    color: red;
+    font-size: 1.4rem;
+}
+.error-input {
+    padding: 5px;
+    border: 1px solid red;
+    border-radius: 5px;
+}

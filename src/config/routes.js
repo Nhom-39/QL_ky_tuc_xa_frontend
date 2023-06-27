@@ -1,10 +1,6 @@
 const routes = {
     home: '/',
-    following: '/following',
-    profile: '/:nickname',
-    upload: '/upload',
     search: '/tim-kiem/phong',
-    live: '/live',
     roomManager: '/admin/quan-ly-phong',
     editRoom: '/admin/quan-ly-phong/:id/edit',
     createRoom: '/admin/quan-ly-phong/create',
@@ -13,6 +9,12 @@ const routes = {
     infoRoom: '/admin/quan-ly-phong/:id',
     register: '/dang-ky',
     roomList: '/danh-sach-phong',
+    login: '/dang-nhap',
+    newsManager: '/admin/quan-ly-thong-bao',
+    createNews: '/admin/quan-ly-thong-bao/create',
+    editNews: '/admin/quan-ly-thong-bao/:id/edit',
+    newsList: '/thong-bao',
+    newsItem: '/thong-bao/:id',
 };
 
 export default routes;

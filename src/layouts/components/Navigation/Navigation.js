@@ -12,7 +12,7 @@ function Navigation() {
         <aside className={cx('wrapper')}>
             <Menu>
                 <MenuItem title="Trang chủ" to={config.routes.home} icon={<FontAwesomeIcon icon={faHome} />} />
-                <MenuItem title="Thông báo" to={config.routes.following} icon={<FontAwesomeIcon icon={faBell} />} />
+                <MenuItem title="Thông báo" to={config.routes.newsList} icon={<FontAwesomeIcon icon={faBell} />} />
             </Menu>
         </aside>
     );

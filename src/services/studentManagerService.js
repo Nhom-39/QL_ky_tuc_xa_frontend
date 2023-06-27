@@ -2,7 +2,7 @@ import * as httpRequest from '~/utils/httpRequest';
 
 export const getStudents = async () => {
     try {
-        const res = await httpRequest.get('admin/quan-ly-sinh-vien');
+        const res = await httpRequest.get('/admin/quan-ly-sinh-vien');
         console.log(res);
         return res;
     } catch (error) {
@@ -12,7 +12,7 @@ export const getStudents = async () => {
 
 export const remove = async (id) => {
     try {
-        const res = await httpRequest.remove(`admin/quan-ly-sinh-vien/${id}`);
+        const res = await httpRequest.remove(`/admin/quan-ly-sinh-vien/${id}`);
         console.log(res);
         return res;
     } catch (error) {
@@ -22,7 +22,7 @@ export const remove = async (id) => {
 
 export const edit = async (id) => {
     try {
-        const res = await httpRequest.get(`admin/quan-ly-sinh-vien/${id}/edit`);
+        const res = await httpRequest.get(`/admin/quan-ly-sinh-vien/${id}/edit`);
         console.log(res);
         return res;
     } catch (error) {
@@ -32,7 +32,7 @@ export const edit = async (id) => {
 
 export const put = async (id, data) => {
     try {
-        const res = await httpRequest.put(`admin/quan-ly-sinh-vien/${id}`, data);
+        const res = await httpRequest.put(`/admin/quan-ly-sinh-vien/${id}`, data);
         console.log(res);
         return res;
     } catch (error) {
@@ -42,7 +42,7 @@ export const put = async (id, data) => {
 
 export const addStudentToRoom = async (id, id_phong) => {
     try {
-        const res = await httpRequest.put(`admin/quan-ly-sinh-vien/${id}/them-vao-phong`, '', {
+        const res = await httpRequest.put(`/admin/quan-ly-sinh-vien/${id}/them-vao-phong`, '', {
             params: {
                 id_phong,
             },
@@ -56,7 +56,7 @@ export const addStudentToRoom = async (id, id_phong) => {
 
 export const RemoveStudentToRoom = async (id) => {
     try {
-        const res = await httpRequest.put(`admin/quan-ly-sinh-vien/${id}/xoa-khoi-phong`);
+        const res = await httpRequest.put(`/admin/quan-ly-sinh-vien/${id}/xoa-khoi-phong`);
         console.log(res);
         return res;
     } catch (error) {
@@ -66,7 +66,7 @@ export const RemoveStudentToRoom = async (id) => {
 
 export const getCreate = async () => {
     try {
-        const res = await httpRequest.get(`admin/quan-ly-sinh-vien/create`);
+        const res = await httpRequest.get(`/admin/quan-ly-sinh-vien/create`);
         console.log(res);
         return res;
     } catch (error) {

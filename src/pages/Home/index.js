@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
@@ -9,9 +10,19 @@ import images from '~/assets/images';
 import Button from '~/components/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import * as newsService from '~/services/newsService';
 
 const cx = classNames.bind(styles);
 function Home() {
+    const [news, setNews] = useState([]);
+    useEffect(() => {
+        fetchNews();
+    }, []);
+
+    const fetchNews = async () => {
+        const result = await newsService.getTop3News();
+        setNews(result);
+    };
     return (
         <div className={cx('wrapper')}>
             <Carousel>
@@ -43,80 +54,31 @@ function Home() {
                 <h2 className={cx('title')}>THÔNG BÁO</h2>
                 <Container>
                     <Row>
-                        <Col xs={12} xl={4} md={4} className={cx('div-card')}>
-                            <Card className={cx('card-item')}>
-                                <Card.Img
-                                    variant="top"
-                                    src="http://ktx.hust.edu.vn/wp-content/uploads/2022/09/huongdank67-400x280.jpg"
-                                />
-                                <Card.Body>
-                                    <Card.Title>
-                                        Thông báo xếp ở nội trú cho sinh viên K67 kỳ I năm học 2022-2023
-                                    </Card.Title>
-                                    <p>
-                                        <FontAwesomeIcon icon={faCalendar} />
-                                        Thang 9, 2022
-                                    </p>
-                                    <Card.Text className={cx('content')}>
-                                        Căn cứ kế hoạch nămhọc 2022-2023. Trung tâm QL KTX xin trân trọng thông báo
-                                        thông tin xếp ở kỳ I/2022-2023 cho sinh viên K67 như sau: Nhà xếp ở: B6, B9, B10
-                                        Thời gian mở đăng ký ...
-                                    </Card.Text>
-                                    <Button primary small>
-                                        Đọc thêm
+                        {news.map((n) => (
+                            <Col xs={12} xl={4} md={4} className={cx('div-card')} key={n.id}>
+                                <Card className={cx('card-item')}>
+                                    <Button to={`/thong-bao/${n.id}`}>
+                                        <Card.Img
+                                            variant="top"
+                                            src="http://ktx.hust.edu.vn/wp-content/uploads/2022/09/huongdank67-400x280.jpg"
+                                        />
                                     </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col xs={12} xl={4} md={4} className={cx('div-card')}>
-                            <Card className={cx('card-item')}>
-                                <Card.Img
-                                    variant="top"
-                                    src="http://ktx.hust.edu.vn/wp-content/uploads/2022/09/huongdank67-400x280.jpg"
-                                />
-                                <Card.Body>
-                                    <Card.Title>
-                                        Thông báo xếp ở nội trú cho sinh viên K67 kỳ I năm học 2022-2023
-                                    </Card.Title>
-                                    <p>
-                                        <FontAwesomeIcon icon={faCalendar} />
-                                        Thang 9, 2022
-                                    </p>
-                                    <Card.Text className={cx('content')}>
-                                        Căn cứ kế hoạch nămhọc 2022-2023. Trung tâm QL KTX xin trân trọng thông báo
-                                        thông tin xếp ở kỳ I/2022-2023 cho sinh viên K67 như sau: Nhà xếp ở: B6, B9, B10
-                                        Thời gian mở đăng ký ...
-                                    </Card.Text>
-                                    <Button primary small>
-                                        Đọc thêm
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col xs={12} xl={4} md={4} className={cx('div-card')}>
-                            <Card className={cx('card-item')}>
-                                <Card.Img
-                                    variant="top"
-                                    src="http://ktx.hust.edu.vn/wp-content/uploads/2022/09/huongdank67-400x280.jpg"
-                                />
-                                <Card.Body>
-                                    <Card.Title>
-                                        Thông báo xếp ở nội trú cho sinh viên K67 kỳ I năm học 2022-2023
-                                    </Card.Title>
-                                    <p>
-                                        <FontAwesomeIcon icon={faCalendar} /> Thang 9, 2022
-                                    </p>
-                                    <Card.Text className={cx('content')}>
-                                        Căn cứ kế hoạch nămhọc 2022-2023. Trung tâm QL KTX xin trân trọng thông báo
-                                        thông tin xếp ở kỳ I/2022-2023 cho sinh viên K67 như sau: Nhà xếp ở: B6, B9, B10
-                                        Thời gian mở đăng ký ...
-                                    </Card.Text>
-                                    <Button primary small>
-                                        Đọc thêm
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
+                                    <Card.Body>
+                                        <Button to={`/thong-bao/${n.id}`}>
+                                            <p className={cx('title-news')}>{n.tieuDe}</p>
+                                        </Button>
+                                        <p className={cx('calender')}>
+                                            <FontAwesomeIcon icon={faCalendar} />
+                                            {n.createdAt}
+                                        </p>
+                                        <Card.Text className={cx('content')}>{n.noiDung}</Card.Text>
+                                        <Button primary small to={`/thong-bao/${n.id}`}>
+                                            Đọc thêm
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
                     </Row>
                 </Container>
             </div>
