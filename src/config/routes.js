@@ -15,7 +15,9 @@ const routes = {
     editNews: '/admin/quan-ly-thong-bao/:id/edit',
     newsList: '/thong-bao',
     newsItem: '/thong-bao/:id',
-    roomTracking: 'user/theo-doi-phong',
+    roomTracking: '/user/theo-doi-phong',
+    feedbackList: '/user/bao-cao-va-phan-hoi',
+    feedbackManager: '/admin/phan-hoi-y-kien',
 };
 
 export default routes;
