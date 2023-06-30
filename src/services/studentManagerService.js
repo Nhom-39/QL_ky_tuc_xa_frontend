@@ -64,16 +64,6 @@ export const RemoveStudentToRoom = async (id) => {
     }
 };
 
-export const getCreate = async () => {
-    try {
-        const res = await httpRequest.get(`/admin/quan-ly-sinh-vien/create`);
-        console.log(res);
-        return res;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 export const registerRoom = async (masv, id_phong_dang_ky) => {
     try {
         const res = await httpRequest.put(`/user/${masv}/dang-ky-phong`, '', {

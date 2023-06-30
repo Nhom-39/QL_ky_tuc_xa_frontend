@@ -50,16 +50,6 @@ export const put = async (id, data) => {
     }
 };
 
-export const getCreate = async () => {
-    try {
-        const res = await httpRequest.get(`/admin/quan-ly-thong-bao/create`);
-        console.log(res);
-        return res;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 export const post = async (data) => {
     try {
         const res = await httpRequest.post(`/admin/quan-ly-thong-bao/create`, data);

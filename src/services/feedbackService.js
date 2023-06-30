@@ -1,8 +1,18 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-export const getRoom = async () => {
+export const getFeedbackByUser = async (masv) => {
     try {
-        const res = await httpRequest.get('/admin/quan-ly-phong');
+        const res = await httpRequest.get(`/user/bao-cao-va-phan-hoi/${masv}`);
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getFeedbackAll = async () => {
+    try {
+        const res = await httpRequest.get(`/admin/phan-hoi-y-kien`);
         console.log(res);
         return res;
     } catch (error) {
@@ -12,7 +22,7 @@ export const getRoom = async () => {
 
 export const remove = async (id) => {
     try {
-        const res = await httpRequest.remove(`/admin/quan-ly-phong/${id}`);
+        const res = await httpRequest.remove(`/admin/bao-cao-va-phan-hoi/${id}`);
         console.log(res);
         return res;
     } catch (error) {
@@ -42,7 +52,7 @@ export const getRoomInfo = async (id) => {
 
 export const put = async (id, data) => {
     try {
-        const res = await httpRequest.put(`/admin/quan-ly-phong/${id}`, data);
+        const res = await httpRequest.put(`/admin/phan-hoi-y-kien/${id}`, data);
         console.log(res);
         return res;
     } catch (error) {
@@ -50,9 +60,9 @@ export const put = async (id, data) => {
     }
 };
 
-export const post = async (data) => {
+export const postCreateReport = async (masv, data) => {
     try {
-        const res = await httpRequest.post(`/admin/quan-ly-phong/create`, data);
+        const res = await httpRequest.post(`/user/${masv}/bao-cao-va-phan-hoi/create`, data);
         console.log(res);
         return res;
     } catch (error) {
