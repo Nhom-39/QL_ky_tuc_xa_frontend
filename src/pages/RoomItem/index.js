@@ -62,10 +62,12 @@ function RoomItem() {
                 </div>
             </div>
             <Row>
-                <Col lg={6}>
+                <Col lg={2}></Col>
+                <Col lg={4}>
                     <img className={cx('image')} src={room.image} alt="" />
                 </Col>
-                <Col lg={6}>
+                <Col lg={1}></Col>
+                <Col lg={3} className="margin-auto">
                     <div className={cx('content')}>
                         <div>
                             Tên phòng: <span className={cx('bold', 'name-room')}>{room.tenPhong}</span>
@@ -82,12 +84,17 @@ function RoomItem() {
                         <div>
                             Giá Phòng: <span className={cx('bold')}>{room.giaPhong}</span> Đ/Tháng
                         </div>
-                        <Button outline onClick={() => handleRegisterRoomSubmit(localStorage.getItem('name'), room.id)}>
+                        <Button
+                            outline
+                            className={cx('btn')}
+                            onClick={() => handleRegisterRoomSubmit(localStorage.getItem('name'), room.id)}
+                        >
                             <FontAwesomeIcon icon={faSignInAlt} />
                             <span>Đăng ký phòng</span>
                         </Button>
                     </div>
                 </Col>
+                <Col lg={2}></Col>
             </Row>
         </>
     );

@@ -1,0 +1,44 @@
+.wrapper {
+    margin-top: 15px;
+}
+.margin {
+    margin-bottom: 15px;
+}
+.room {
+    margin: 10px 0;
+    float: left;
+
+    & svg {
+        margin: auto;
+        font-size: 30px;
+        color: rgb(45, 211, 33);
+    }
+}
+.img-room {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+}
+.content {
+    display: flex;
+    align-items: center;
+}
+.title {
+    height: 45px;
+    background-color: rgb(49, 52, 50);
+    color: #fff;
+    padding: 0 15px;
+}
+.image {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+.items {
+    padding: 15px 0;
+    border: 1px solid #ccc;
+    background-color: #f9f6f6;
+}
+.m-top {
+    margin-top: 15px;
+}

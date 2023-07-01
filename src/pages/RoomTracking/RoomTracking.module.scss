@@ -1,0 +1,48 @@
+.wrapper {
+    // margin : 35px 0;
+}
+.banner {
+    height: 120px;
+    background-color: #f9f9f9;
+    font-size: 25px;
+    font-weight: 600;
+    span {
+        justify-content: center;
+        display: flex;
+        height: 100%;
+        align-items: center;
+    }
+}
+.img-room {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+.info {
+    font-size: 19px;
+}
+.btn {
+    width: 100%;
+    margin: 25px 0 15px 0;
+}
+.wrapper-modal {
+    min-height: 55px;
+}
+.avatar {
+    width: 45px;
+    height: 45px;
+}
+.title {
+    height: 40px;
+}
+
+.items {
+    padding: 15px 5px;
+    border: 1px solid #ccc;
+}
+
+.wrapper-bill {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-top: 10px;
+}

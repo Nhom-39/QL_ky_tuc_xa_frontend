@@ -111,7 +111,7 @@ function StudentManager() {
             {!!message && error && <Toast message={message} error />}
             {students.map((student) => (
                 <Row className={cx('card-student', 'flex')} key={student.id}>
-                    <Col xs="3">
+                    <Col lg="3">
                         <StudentItem
                             data={[
                                 student.hoTen,
@@ -137,7 +137,7 @@ function StudentManager() {
                             </div>
                         </StudentItem>
                     </Col>
-                    <Col xs="4">
+                    <Col lg="4">
                         <Button
                             leftIcon={<FontAwesomeIcon icon={faPenToSquare} />}
                             className={cx('btn-click')}
@@ -169,10 +169,35 @@ function StudentManager() {
                     <Col>
                         {student.room === null && (
                             <div className={cx('flex', 'items-center')}>
-                                <Col xs="6" className={cx('warning')}>
-                                    <FontAwesomeIcon icon={faTriangleExclamation} /> Sinh viên chưa có phòng
-                                </Col>
-                                <Col xs="6">
+                                {student.roomRegister === null ? (
+                                    <Col lg="6" className={cx('warning')}>
+                                        <FontAwesomeIcon icon={faTriangleExclamation} /> Sinh viên chưa có phòng
+                                    </Col>
+                                ) : (
+                                    <Col lg={6}>
+                                        Sinh viên đăng ký vào phòng:
+                                        <div className={cx('div-room', 'flex')}>
+                                            <img className={cx('img-room')} src={student.roomRegister.image} alt="" />
+                                            <div className={cx('info-room')}>
+                                                <div>Phòng: {student.roomRegister.tenPhong}</div>
+                                                <div>
+                                                    Thuộc tòa nhà:
+                                                    {student.roomRegister.toaNha}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <Button
+                                            small
+                                            success
+                                            onClick={() => {
+                                                handleAddStudenToRoom(student.id, student.roomRegister.id);
+                                            }}
+                                        >
+                                            Chấp nhận
+                                        </Button>
+                                    </Col>
+                                )}
+                                <Col lg="6">
                                     <Button
                                         leftIcon={<FontAwesomeIcon icon={faCheckToSlot} />}
                                         success
@@ -190,10 +215,10 @@ function StudentManager() {
 
                         {student.room != null && (
                             <div className={cx('flex', 'items-center')}>
-                                <Col xs="6" className={cx('succses')}>
+                                <Col lg="6" className={cx('succses')}>
                                     <FontAwesomeIcon icon={faCheckCircle} /> Sinh viên đã có phòng
                                 </Col>
-                                <Col xs="6">
+                                <Col lg="6">
                                     <Button
                                         leftIcon={<FontAwesomeIcon icon={faPersonCircleMinus} />}
                                         className={cx('btn-click', 'btn-width')}

@@ -20,6 +20,7 @@ import RoomItem from '~/pages/RoomItem';
 import RoomTracking from '~/pages/RoomTracking';
 import FeedbackList from '~/pages/FeedbackList';
 import FeedbackManager from '~/pages/FeedbackManager';
+import FinancialManager from '~/pages/FinancialManager';
 const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.profile, component: Profile },
@@ -41,6 +42,7 @@ const publicRoutes = [
     { path: config.routes.roomTracking, component: RoomTracking },
     { path: config.routes.feedbackList, component: FeedbackList },
     { path: config.routes.feedbackManager, component: FeedbackManager },
+    { path: config.routes.financialManager, component: FinancialManager },
 ];
 
 const privateRoutes = [];
