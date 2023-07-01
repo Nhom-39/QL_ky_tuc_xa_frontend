@@ -18,6 +18,7 @@ const routes = {
     roomTracking: '/user/theo-doi-phong',
     feedbackList: '/user/bao-cao-va-phan-hoi',
     feedbackManager: '/admin/phan-hoi-y-kien',
+    financialManager: '/admin/quan-ly-tai-chinh',
 };
 
 export default routes;

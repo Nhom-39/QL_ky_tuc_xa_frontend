@@ -80,7 +80,17 @@ export const registerRoom = async (masv, id_phong_dang_ky) => {
 
 export const getInfoRoom = async (masv) => {
     try {
-        const res = await httpRequest.get(`user/${masv}/room`);
+        const res = await httpRequest.get(`/user/${masv}/room`);
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getListStudentByRoom = async (id_phong) => {
+    try {
+        const res = await httpRequest.get(`/admin/quan-ly-phong/${id_phong}/student`);
         console.log(res);
         return res;
     } catch (error) {

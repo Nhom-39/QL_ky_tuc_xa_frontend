@@ -11,6 +11,7 @@ import ModalBtn from '~/components/Modal';
 import * as feedbackService from '~/services/feedbackService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { Col, Row } from 'react-bootstrap';
 
 const cx = classNames.bind(styles);
 
@@ -22,7 +23,6 @@ function FeedbackList() {
 
     const [deleteFeedbackId, setDeleteFeedbackId] = useState(null);
 
-    const handleCloseModalDelete = () => setDeleteFeedbackId(null);
     const handleShowModalDelete = (feedbackId) => setDeleteFeedbackId(feedbackId);
     // const [error, setError] = useState('');
 
@@ -79,9 +79,11 @@ function FeedbackList() {
     };
 
     return (
-        <>
+        <div className={cx('wrapper')}>
             <div>
-                <Btn onClick={handleShow}>Thêm báo cáo mới</Btn>
+                <Btn onClick={handleShow} success className={cx('m-bottom')}>
+                    Thêm báo cáo mới
+                </Btn>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Gửi báo cáo đến quản trị viên</Modal.Title>
@@ -108,50 +110,51 @@ function FeedbackList() {
                     </Modal.Footer>
                 </Modal>
             </div>
-            {feedbacks.map((feedback) => (
-                <div className={cx('', 'flex')} key={feedback.id}>
-                    <div className={cx('content')}>
-                        <div>
-                            Tên phòng: <span className={cx('bold')}>{feedback.tieuDe}</span>
-                        </div>
-                        <div>
-                            Tòa nhà: <span className={cx('bold')}>{feedback.noiDung}</span>
-                        </div>
-                        <div>
-                            Số lượng tối đa sinh viên: <span className={cx('bold')}>{feedback.traLoi}</span>
-                        </div>
-                    </div>
+            <Row className={cx('title', 'items-center')}>
+                <Col lg={1}>STT</Col>
+                <Col lg={3}>Tiêu đề</Col>
+                <Col lg={3}>Nội dung</Col>
+                <Col lg={2}>Trả lời</Col>
+            </Row>
+            {feedbacks.map((feedback, i) => (
+                <Row className={cx('items-center', 'items')} key={feedback.id}>
+                    <Col lg={1} className={cx('m-left')}>
+                        <span>{i + 1}</span>
+                    </Col>
+                    <Col lg={3}>
+                        <span className={cx('m-left')}>{feedback.tieuDe}</span>
+                    </Col>
+                    <Col lg={3}>
+                        <span className={cx('m-left')}>{feedback.noiDung}</span>
+                    </Col>
+                    <Col lg={3}>
+                        <span className={cx('m-left')}>{feedback.traLoi}</span>
+                    </Col>
 
-                    {/* <Button
-                        leftIcon={<FontAwesomeIcon icon={faPenToSquare} />}
-                        className={cx('btn-click')}
-                        outline
-                        to={`/admin/quan-ly-phong/${room.id}/edit`}
-                    >
-                        Thay đổi thông tin phòng
-                    </Button> */}
-                    <Btn
-                        leftIcon={<FontAwesomeIcon icon={faTrashCan} />}
-                        className={cx('btn-click')}
-                        primary
-                        onClick={() => handleShowModalDelete(feedback.id)}
-                    >
-                        Xóa phòng
-                    </Btn>
-                    <ModalBtn
-                        show={deleteFeedbackId === feedback.id}
-                        textHeader="Xoá phản hồi?"
-                        textBody="Hành động này không thể khôi phục. Bạn chắc chắn muốn xóa phản hồi này?"
-                        textFooter="Xác nhận"
-                        handleClose={handleClose}
-                        handleDelete={() => {
-                            setDeleteFeedbackId(null);
-                            deleteFeedback(feedback.id);
-                        }}
-                    />
-                </div>
+                    <Col lg={2}>
+                        <Btn
+                            leftIcon={<FontAwesomeIcon icon={faTrashCan} />}
+                            className={cx('btn-click')}
+                            primary
+                            onClick={() => handleShowModalDelete(feedback.id)}
+                        >
+                            Xóa phản hồi
+                        </Btn>
+                        <ModalBtn
+                            show={deleteFeedbackId === feedback.id}
+                            textHeader="Xoá phản hồi?"
+                            textBody="Hành động này không thể khôi phục. Bạn chắc chắn muốn xóa phản hồi này?"
+                            textFooter="Xác nhận"
+                            handleClose={() => setDeleteFeedbackId(null)}
+                            handleDelete={() => {
+                                setDeleteFeedbackId(null);
+                                deleteFeedback(feedback.id);
+                            }}
+                        />
+                    </Col>
+                </Row>
             ))}
-        </>
+        </div>
     );
 }
 

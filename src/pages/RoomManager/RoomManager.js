@@ -1,22 +1,36 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 import styles from './RoomManager.module.scss';
 
-import Button from '~/components/Button';
+import Btn from '~/components/Button';
 import * as roomManagerService from '~/services/roomManagerService';
+import * as studentManagerService from '~/services/studentManagerService';
 import config from '~/config';
 import Success from '~/components/Toast/Toast';
 import ModalBtn from '~/components/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import StudentItem from '~/components/StudentItem/StudentItem';
+import images from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
 function RoomManager() {
     const [rooms, setRooms] = useState([]);
+    const [students, setStudents] = useState([]);
     const [message, setMessage] = useState('');
     const [deleteRoomId, setDeleteRoomId] = useState(null);
+    const [roomId, setRoomId] = useState(null);
+
+    const handleCloseStudent = () => setRoomId(null);
+    const handleShowStudent = (roomId) => {
+        setRoomId(roomId);
+        fetchStudents(roomId);
+    };
 
     const handleClose = () => setDeleteRoomId(null);
     const handleShow = (roomId) => setDeleteRoomId(roomId);
@@ -33,6 +47,11 @@ function RoomManager() {
         }, 3000);
     };
 
+    const fetchStudents = async (roomId) => {
+        const result = await studentManagerService.getListStudentByRoom(roomId);
+        setStudents(result);
+    };
+
     const deleteRoom = async (id) => {
         try {
             const mess = await roomManagerService.remove(id);
@@ -46,14 +65,14 @@ function RoomManager() {
     return (
         <div>
             {!!message && <Success message={message} />}
-            <Button
+            <Btn
                 className={cx('add-room')}
                 leftIcon={<FontAwesomeIcon icon={faPlus} />}
                 success
                 to={config.routes.createRoom}
             >
                 Thêm phòng
-            </Button>
+            </Btn>
             {rooms.map((room) => (
                 <div className={cx('card-room', 'flex')} key={room.id}>
                     <img className={cx('img-room')} src={room.image} alt="" />
@@ -68,23 +87,69 @@ function RoomManager() {
                             Số lượng tối đa sinh viên: <span className={cx('bold')}>{room.soLuongMax}</span>
                         </div>
                     </div>
-
-                    <Button
+                    <>
+                        <Btn onClick={() => handleShowStudent(room.id)} className={cx('btn-click')} outline>
+                            Xem danh sách sinh viên
+                        </Btn>
+                        <Modal show={roomId === room.id} onHide={handleCloseStudent}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>
+                                    Xem danh sách sinh viên: Phòng {room.tenPhong} - Tòa nhà {room.toaNha}
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body className={cx('wrapper-student')}>
+                                {students.map((student) => (
+                                    <div key={student.id}>
+                                        <StudentItem
+                                            data={[
+                                                student.hoTen,
+                                                student.maSV,
+                                                student.gioiTinh,
+                                                student.ngaySinh,
+                                                student.email,
+                                                student.soDienThoai,
+                                                student.room,
+                                            ]}
+                                        >
+                                            <div className="flex">
+                                                {student.gioiTinh === 'Nam' && (
+                                                    <img className={cx('avatar')} src={images.avatarNam} alt="" />
+                                                )}
+                                                {student.gioiTinh === 'Nữ' && (
+                                                    <img className={cx('avatar')} src={images.avatarNu} alt="" />
+                                                )}
+                                                <div>
+                                                    <span>{student.hoTen}</span>
+                                                    <p>{student.maSV}</p>
+                                                </div>
+                                            </div>
+                                        </StudentItem>
+                                    </div>
+                                ))}
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseStudent}>
+                                    Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </>
+                    <Btn
                         leftIcon={<FontAwesomeIcon icon={faPenToSquare} />}
                         className={cx('btn-click')}
                         outline
                         to={`/admin/quan-ly-phong/${room.id}/edit`}
                     >
                         Thay đổi thông tin phòng
-                    </Button>
-                    <Button
+                    </Btn>
+                    <Btn
                         leftIcon={<FontAwesomeIcon icon={faTrashCan} />}
                         className={cx('btn-click')}
                         primary
                         onClick={() => handleShow(room.id)}
                     >
                         Xóa phòng
-                    </Button>
+                    </Btn>
                     <ModalBtn
                         show={deleteRoomId === room.id}
                         textHeader="Xoá phòng?"
