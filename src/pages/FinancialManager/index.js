@@ -127,6 +127,7 @@ function FinancialManager() {
             try {
                 const result = await financialService.postCashCollection(id_tieu_thu, data);
                 setMessage(result);
+                setError(false);
                 setCdId(null);
             } catch (error) {
                 console.error(error);

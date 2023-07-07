@@ -53,6 +53,10 @@
 .btn-room {
     display: block;
 }
+
+.btn-room + .btn-room {
+    margin-left: 0;
+}
 .wrapper {
 }
 .img-room {
