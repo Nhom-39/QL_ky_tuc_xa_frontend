@@ -30,26 +30,6 @@ export const remove = async (id) => {
     }
 };
 
-export const edit = async (id) => {
-    try {
-        const res = await httpRequest.get(`/admin/quan-ly-phong/${id}/edit`);
-        console.log(res);
-        return res;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-export const getRoomInfo = async (id) => {
-    try {
-        const res = await httpRequest.get(`/admin/quan-ly-phong/${id}`);
-        console.log(res);
-        return res;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 export const put = async (id, data) => {
     try {
         const res = await httpRequest.put(`/admin/phan-hoi-y-kien/${id}`, data);

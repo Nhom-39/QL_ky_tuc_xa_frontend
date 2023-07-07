@@ -24,27 +24,31 @@ import FinancialManager from '~/pages/FinancialManager';
 const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.profile, component: Profile },
-    { path: config.routes.roomManager, component: RoomManager },
-    { path: config.routes.createRoom, component: CreateRoom },
-    { path: config.routes.studentManager, component: StudentManager },
-    { path: config.routes.editStudent, component: EditStudent },
-    { path: config.routes.roomItem, component: RoomItem },
-    { path: config.routes.editRoom, component: EditRoom },
+    { path: config.routes.login, component: Login },
     { path: config.routes.register, component: Register },
+    { path: config.routes.roomItem, component: RoomItem },
     { path: config.routes.roomList, component: RoomList },
     { path: config.routes.search, component: SearchPage },
-    { path: config.routes.login, component: Login },
+    { path: config.routes.newsList, component: NewsList },
+    { path: config.routes.newsItem, component: NewsItem },
+];
+
+const privateRoutesAdmin = [
+    { path: config.routes.roomManager, component: RoomManager },
+    { path: config.routes.createRoom, component: CreateRoom },
+    { path: config.routes.editRoom, component: EditRoom },
+    { path: config.routes.studentManager, component: StudentManager },
+    { path: config.routes.editStudent, component: EditStudent },
     { path: config.routes.newsManager, component: NewsManager },
     { path: config.routes.createNews, component: CreateNews },
     { path: config.routes.editNews, component: EditNews },
-    { path: config.routes.newsList, component: NewsList },
-    { path: config.routes.newsItem, component: NewsItem },
-    { path: config.routes.roomTracking, component: RoomTracking },
-    { path: config.routes.feedbackList, component: FeedbackList },
     { path: config.routes.feedbackManager, component: FeedbackManager },
     { path: config.routes.financialManager, component: FinancialManager },
 ];
 
-const privateRoutes = [];
+const privateRoutesUser = [
+    { path: config.routes.roomTracking, component: RoomTracking },
+    { path: config.routes.feedbackList, component: FeedbackList },
+];
 
-export { publicRoutes, privateRoutes };
+export { publicRoutes, privateRoutesAdmin, privateRoutesUser };
