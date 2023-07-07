@@ -22,6 +22,7 @@ import Menu from '~/components/Popper/Menu';
 import Image from '~/components/Image';
 import Search from '../Search';
 import Navigation from '../Navigation';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -50,11 +51,6 @@ const MENU_ITEMS = [
 function Header() {
     const authenticated = localStorage.getItem('authenticated');
     const authority = localStorage.getItem('authorities');
-
-    const handleMenuChange = (menuItem) => {
-        console.log(menuItem);
-    };
-
     const adminMenu = [
         {
             icon: <FontAwesomeIcon icon={faPeopleRoof}></FontAwesomeIcon>,
@@ -110,8 +106,8 @@ function Header() {
         },
     ];
 
-    const itemsAdmin = authenticated && authority === 'ADMIN' ? adminMenu : MENU_ITEMS;
-    const itemsUser = authenticated && authority === 'USER' ? userMenu : MENU_ITEMS;
+    const itemsAdmin = authority === 'ADMIN' ? adminMenu : MENU_ITEMS;
+    const itemsUser = authority === 'USER' ? userMenu : MENU_ITEMS;
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -153,7 +149,6 @@ function Header() {
                         items={
                             (authority === 'ADMIN' && itemsAdmin) || (authority === 'USER' && itemsUser) || MENU_ITEMS
                         }
-                        onChange={handleMenuChange}
                     >
                         {authenticated ? (
                             <Image
