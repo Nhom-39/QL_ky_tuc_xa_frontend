@@ -7,9 +7,11 @@ import images from '~/assets/images';
 import { Col, Row } from 'react-bootstrap';
 import config from '~/config';
 import Toast from '~/components/Toast/Toast';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 function Login() {
+    const navigate = useNavigate();
     const [taiKhoan, setTaiKhoan] = useState('');
     const [matKhau, setMatKhau] = useState('');
 
@@ -36,9 +38,8 @@ function Login() {
                 if (result === true) {
                     setMessage('Đăng nhập thành công');
                     setError(false);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 3000);
+                    navigate('/');
+                    window.location.reload();
                 } else {
                     setMessage(result);
                     setError(true);

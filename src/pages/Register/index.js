@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import * as authService from '~/services/authService';
 import styles from './Register.module.scss';
@@ -11,6 +12,7 @@ import Toast from '~/components/Toast/Toast';
 const cx = classNames.bind(styles);
 
 function Register() {
+    const navigate = useNavigate();
     const [taiKhoan, setTaiKhoan] = useState('');
     const [matKhau, setMatKhau] = useState('');
     const [matKhauConfirm, setMatKhauConfirm] = useState('');
@@ -87,6 +89,7 @@ function Register() {
                 setMessage(result);
                 if (result === 'Đăng ký tài khoản thành công') {
                     setError(false);
+                    navigate('/dang-nhap');
                 } else setError(true);
                 console.log(result);
             } catch (error) {

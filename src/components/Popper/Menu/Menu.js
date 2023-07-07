@@ -7,6 +7,7 @@ import Header from './Header';
 import styles from './Menu.module.scss';
 import { useState } from 'react';
 import * as authService from '~/services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -15,12 +16,15 @@ const defaultFn = () => {};
 function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
 
+    const navigate = useNavigate();
+
     const current = history[history.length - 1];
 
     const handleFormSubmitLogout = async (event) => {
         try {
             const result = await authService.getLogout();
-            console.log(result);
+            navigate('/');
+            window.location.reload();
         } catch (error) {
             console.error(error);
         }

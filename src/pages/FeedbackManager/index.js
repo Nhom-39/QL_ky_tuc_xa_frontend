@@ -14,24 +14,31 @@ import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { Col, Row } from 'react-bootstrap';
 import StudentItem from '~/components/StudentItem/StudentItem';
 import images from '~/assets/images';
+import Toast from '~/components/Toast/Toast';
 
 const cx = classNames.bind(styles);
 function FeedbackManager() {
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
+
     const [traLoi, setTraLoi] = useState('');
     const [feedbacks, setFeedBacks] = useState([]);
     const [feedbackId, setFeedbackId] = useState(null);
 
     const [deleteFeedbackId, setDeleteFeedbackId] = useState(null);
+    const [errorValue1, setErrorValue1] = useState(false);
 
     const handleCloseModalDelete = () => setDeleteFeedbackId(null);
     const handleShowModalDelete = (feedbackId) => setDeleteFeedbackId(feedbackId);
-    // const [error, setError] = useState('');
 
     const handleTraLoiChange = (e) => {
         setTraLoi(e.target.value);
     };
 
-    const handleClose = () => setFeedbackId(null);
+    const handleClose = () => {
+        setFeedbackId(null);
+        setErrorValue1(false);
+    };
     const handleShow = (feedbackId) => setFeedbackId(feedbackId);
     const handleFormSubmit = async (id) => {
         const data = {
@@ -41,19 +48,23 @@ function FeedbackManager() {
         if (traLoi !== '') {
             try {
                 await feedbackService.put(id, data);
+                setFeedbackId(null);
+                setMessage('Trả lời thành công');
+                setError(false);
+                setTraLoi('');
+                fetchApi();
             } catch (error) {
                 console.error(error);
             }
-            setFeedbackId(null);
-            // setMessage('Lưu thông tin sinh viên thành công');
         } else {
-            // if (hoTen === '') setErrorValue1(true);
-            // if (email === '') setErrorValue2(true);
-            // setMessage('Các trường chưa được nhập đầy đủ thông tin');
-            // setError(true);
+            if (traLoi === '') {
+                setErrorValue1(true);
+            } else setErrorValue1(false);
+            setMessage('Các trường chưa được nhập đầy đủ thông tin');
+            setError(true);
         }
         setTimeout(() => {
-            // setMessage('');
+            setMessage('');
         }, 3000);
     };
     useEffect(() => {
@@ -67,7 +78,11 @@ function FeedbackManager() {
     const deleteFeedback = async (id) => {
         try {
             const mess = await feedbackService.remove(id);
-            // setMessage(mess);
+            setMessage(mess);
+            setError(false);
+            setTimeout(() => {
+                setMessage('');
+            }, 3000);
             fetchApi();
         } catch (error) {
             console.error(error);
@@ -76,9 +91,11 @@ function FeedbackManager() {
 
     return (
         <div className={cx('margin')}>
+            {!!message && !error && <Toast message={message} success />}
+            {!!message && error && <Toast message={message} error />}
             <Row className={cx('title-page')}>Phản hồi ý kiến</Row>
             <Row className={cx('content', 'items-center')}>
-                <Col lg={1}>Sinh viên</Col>
+                <Col lg={1}>&emsp;Sinh viên</Col>
                 <Col lg={2}>Tiêu đề</Col>
                 <Col lg={3}>Nội Dung Gửi</Col>
                 <Col lg={3}>Nội dung trả lời</Col>
@@ -135,7 +152,12 @@ function FeedbackManager() {
                                 <Form>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                         <Form.Label>Nội dung</Form.Label>
-                                        <Form.Control as="textarea" rows={3} onChange={handleTraLoiChange} />
+                                        <Form.Control
+                                            className={errorValue1 ? cx('error-input') : ''}
+                                            as="textarea"
+                                            rows={3}
+                                            onChange={handleTraLoiChange}
+                                        />
                                     </Form.Group>
                                 </Form>
                             </Modal.Body>

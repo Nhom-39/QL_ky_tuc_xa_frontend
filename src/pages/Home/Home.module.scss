@@ -10,11 +10,14 @@
 
     font-size: 35px;
 }
-.div-card {
-}
+
 .card-item {
     border: 1px solid #ccc;
     margin: 0 15px 15px 15px;
+
+    &:hover {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    }
 }
 .title-news {
     font-size: 1.7rem;

@@ -36,7 +36,7 @@ export const postCreateConsumption = async (roomId, data) => {
         console.log(res);
         return res;
     } catch (error) {
-        console.log(error);
+        console.log(error.response);
     }
 };
 
@@ -47,6 +47,9 @@ export const postCashCollection = async (id_tieu_thu, data) => {
         return res;
     } catch (error) {
         console.log(error);
+        if (error.response && error.response.status === 400) {
+            return error.response.data;
+        }
     }
 };
 
