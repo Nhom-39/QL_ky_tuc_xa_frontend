@@ -41,7 +41,7 @@ function CreateNews() {
 
         if (tieuDe !== '' && noiDung !== '' && image !== '') {
             try {
-                await newsManagerService.post(data);
+                await newsManagerService.post(localStorage.getItem('name'), data);
             } catch (error) {
                 console.error(error);
             }
@@ -103,7 +103,7 @@ function CreateNews() {
             </div>
 
             <Button success onClick={handleFormSubmit}>
-                Thêm phòng
+                Thêm thông báo
             </Button>
         </div>
     );

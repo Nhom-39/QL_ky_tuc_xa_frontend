@@ -50,9 +50,9 @@ export const put = async (id, data) => {
     }
 };
 
-export const post = async (data) => {
+export const post = async (username, data) => {
     try {
-        const res = await httpRequest.post(`/admin/quan-ly-thong-bao/create`, data);
+        const res = await httpRequest.post(`/admin/quan-ly-thong-bao/create/${username}`, data);
         console.log(res);
         return res;
     } catch (error) {

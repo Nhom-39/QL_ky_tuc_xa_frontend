@@ -85,11 +85,12 @@ function StudentManager() {
         }
     };
 
-    const handleRoomClick = (id_phong, ten_phong, toa_nha, so_luong_max, image) => {
+    const handleRoomClick = (id_phong, ten_phong, toa_nha, so_luong, image) => {
         setRoomId(id_phong);
         setTenPhong(ten_phong);
         setToaNha(toa_nha);
-        setSoLuongMax(so_luong_max);
+        setSoLuongMax(so_luong);
+        console.log(so_luong);
         setImage(image);
         setShowClickSearchRoom(true);
     };

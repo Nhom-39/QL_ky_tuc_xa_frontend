@@ -30,9 +30,9 @@ export const remove = async (id) => {
     }
 };
 
-export const put = async (id, data) => {
+export const put = async (id, username, data) => {
     try {
-        const res = await httpRequest.put(`/admin/phan-hoi-y-kien/${id}`, data);
+        const res = await httpRequest.put(`/admin/phan-hoi-y-kien/${id}/${username}`, data);
         console.log(res);
         return res;
     } catch (error) {

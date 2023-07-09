@@ -47,7 +47,7 @@ function FeedbackManager() {
 
         if (traLoi !== '') {
             try {
-                await feedbackService.put(id, data);
+                await feedbackService.put(id, localStorage.getItem('name'), data);
                 setFeedbackId(null);
                 setMessage('Trả lời thành công');
                 setError(false);

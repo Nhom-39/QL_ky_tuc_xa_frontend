@@ -36,7 +36,7 @@ function SearchPage() {
             <Container>
                 <Row>
                     {searchResult.map((room) => (
-                        <Col xs={12} xl={3} md={4} className={cx('div-card')}>
+                        <Col key={room.id} xs={12} xl={3} md={4} className={cx('div-card')}>
                             <Link to={`/danh-sach-phong/${room.id}`}>
                                 <Card className={cx('card-item')}>
                                     <Card.Img className={cx('image')} variant="top" src={room.image} />
