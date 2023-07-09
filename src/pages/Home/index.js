@@ -58,10 +58,7 @@ function Home() {
                             <Col xs={12} xl={4} md={4} className={cx('div-card')} key={n.id}>
                                 <Card className={cx('card-item')}>
                                     <Button to={`/thong-bao/${n.id}`}>
-                                        <Card.Img
-                                            variant="top"
-                                            src="http://ktx.hust.edu.vn/wp-content/uploads/2022/09/huongdank67-400x280.jpg"
-                                        />
+                                        <Card.Img className={cx('image-news')} variant="top" src={n.image} />
                                     </Button>
                                     <Card.Body>
                                         <Button to={`/thong-bao/${n.id}`}>

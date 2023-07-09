@@ -82,7 +82,7 @@ function SearchRoom({ onRoomClick }) {
                                             result.id,
                                             result.tenPhong,
                                             result.toaNha,
-                                            result.soLuong,
+                                            result.soLuongMax,
                                             result.image,
                                         )
                                     }
